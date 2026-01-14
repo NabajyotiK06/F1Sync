@@ -1,45 +1,41 @@
 /**
  * raceRoutes.js
  * --------------
- * This file defines all race-related API endpoints for F1Sync.
+ * Defines all race-related API endpoints for F1Sync.
  *
  * Responsibilities:
  * - Handle HTTP requests
- * - Validate query parameters
- * - Call service-layer functions
- * - Send clean JSON responses
+ * - Validate inputs
+ * - Call service / utility layers
+ * - Return clean JSON responses
  *
  * IMPORTANT:
- * - NO business logic here
- * - NO external API calls here
+ * - No business logic here
+ * - No replay logic here
+ * - No external API calls here
  */
 
 import express from "express";
 import { getRacesByYear } from "../services/f1Service.js";
+import { generateMockReplay } from "../utils/replayGenerator.js";
 
 const router = express.Router();
 
 /**
+ * =====================================================
  * GET /api/race/info
- * ------------------
+ * =====================================================
  * Purpose:
- * - Fetch all F1 races (meetings) for a given year
+ * - Fetch all races (meetings) for a given year
+ * - Used by frontend for race selection
  *
- * Example request:
+ * Example:
  * /api/race/info?year=2023
- *
- * Example response:
- * {
- *   success: true,
- *   data: [ { race objects... } ]
- * }
  */
 router.get("/info", async (req, res) => {
   const { year } = req.query;
 
-  /**
-   * BASIC VALIDATION
-   */
+  // Input validation
   if (!year) {
     return res.status(400).json({
       success: false,
@@ -48,31 +44,57 @@ router.get("/info", async (req, res) => {
   }
 
   try {
-    /**
-     * Call service layer
-     * The service handles:
-     * - External API call
-     * - Data normalization
-     */
+    // Fetch races from OpenF1 via service layer
     const races = await getRacesByYear(year);
 
-    /**
-     * Successful response
-     */
     res.json({
       success: true,
       data: races,
     });
   } catch (error) {
-    /**
-     * Error response
-     * We send only clean message to client
-     */
     res.status(500).json({
       success: false,
       message: error.message,
     });
   }
+});
+
+/**
+ * =====================================================
+ * GET /api/race/replay
+ * =====================================================
+ * Purpose:
+ * - Generate replay timeline for a selected race
+ * - Returns metadata + normalized frames
+ *
+ * Example:
+ * /api/race/replay?meeting_key=1219
+ */
+router.get("/replay", (req, res) => {
+  const { meeting_key } = req.query;
+
+  // Input validation
+  if (!meeting_key) {
+    return res.status(400).json({
+      success: false,
+      message: "'meeting_key' query parameter is required",
+    });
+  }
+
+  /**
+   * Generate replay data
+   * NOTE:
+   * - Currently mock data
+   * - Will be replaced with real telemetry later
+   */
+  const replayData = generateMockReplay(120, 2); // 120s duration, 2 FPS
+
+  res.json({
+    success: true,
+    meeting_key,
+    metadata: replayData.metadata,
+    frames: replayData.frames,
+  });
 });
 
 export default router;
