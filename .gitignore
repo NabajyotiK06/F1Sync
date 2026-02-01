@@ -1,0 +1,17 @@
+
+# Backend Cache (Large Files)
+**/cache/
+**/__pycache__/
+**/*.pyc
+backend/venv/
+backend/.env
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+frontend/.DS_Store
+
+# IDEs
+.vscode/
+.idea/
