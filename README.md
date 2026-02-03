@@ -8,7 +8,7 @@ F1Sync is a modern, real-time Formula 1 race replay and visualization dashboard.
 - **Dynamic Leaderboard**: Live-updating leaderboard with driver status, tyre compounds, intervals, and fastest lap indicators.
 - **Interactive Track Map**: 2D track visualization showing real-time car positions and pit lane activity.
 - **Race Control**: Play, pause, scrub through the race, and adjust playback speed (up to 20x).
-- **Session Select**: easy access to the full archive of past F1 seasons.
+- **Session Select**: Easy access to the full archive of past F1 seasons.
 - **Minimalist Aesthetic**: High-contrast, glassmorphism-inspired UI designed for clarity and immersion.
 
 ## Tech Stack
@@ -55,6 +55,9 @@ Open `http://localhost:5173` in your browser.
 1. Select a **Year** and **Grand Prix** from the main menu.
 2. Click **Launch Session** to load the race data (this may take a moment for the first load as data is cached).
 3. Use the playback controls at the bottom to watch the race.
-   - **Play/Pause**: Toggle playback.
-   - **Seek Bar**: Jump to any point in the race.
    - **Speed**: Toggle between 1x, 5x, 10x, and 20x speeds.
+
+## Attribution
+
+This project was inspired by the work of **IAmTomShaw**.
+Original project video: [I built this VIRAL F1 Python Project (and open-sourced it)](https://www.youtube.com/watch?v=TiQEElXyY2w&pp=ygUUZjEgdGVsZW1ldHJ5IHByb2plY3TYBsoB)

@@ -480,6 +480,8 @@ export default function App() {
           </div>
         </div>
       </div>
+
+      <div className="watermark">Designed by Nabajyoti</div>
     </div>
   );
 }

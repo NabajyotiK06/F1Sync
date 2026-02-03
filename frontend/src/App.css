@@ -407,3 +407,15 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.watermark {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 14px;
+  font-family: 'Orbitron', sans-serif;
+  pointer-events: none;
+  z-index: 1000;
+  letter-spacing: 1px;
+}

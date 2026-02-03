@@ -73,7 +73,7 @@ def generate_replay(year: int, race: str):
 
     for drv in drivers:
         try:
-            laps = session.laps.pick_driver(drv)
+            laps = session.laps.pick_drivers(drv)
         except:
             continue
             
